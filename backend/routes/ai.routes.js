@@ -1,27 +1,50 @@
-
 const express = require("express");
 
 const {
     chatWithAI
 } = require("../controllers/aiController");
 
-const authMiddleware = require("../middleware/authMiddleware");
+const {
+    generateRoutineWithAI
+} = require("../controllers/aiRoutineController");
+
+const authMiddleware =
+    require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Chat normal
+
+// =====================================================
+// CHAT NORMAL
+// =====================================================
+
 router.post(
     "/chat",
     authMiddleware,
     chatWithAI
 );
 
-// Chat con streaming
+
+// =====================================================
+// CHAT STREAMING
+// =====================================================
+
 router.post(
     "/chat-stream",
     authMiddleware,
     chatWithAI
 );
 
-module.exports = router;
 
+// =====================================================
+// GENERAR RUTINA CON IA
+// =====================================================
+
+router.post(
+    "/generate-routine",
+    authMiddleware,
+    generateRoutineWithAI
+);
+
+
+module.exports = router;
